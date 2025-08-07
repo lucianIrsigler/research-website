@@ -1,0 +1,43 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+static/
+
+# If using dotenv for secrets
+.env
+
+# Migrations (optional to ignore, see note below)
+**/migrations/*.py
+**/migrations/*.pyc
+!**/migrations/__init__.py  # Keep __init__.py to maintain the package
+
+# Pytest cache
+.pytest_cache/
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Virtual environments
+venv/
+ENV/
+env/
