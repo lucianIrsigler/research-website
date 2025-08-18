@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-5d(jgbb6i#vs0xo2p@l9*$l)(fis^n%zdhnbtlpfna)4u@er2y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['onestepframes.onrender.com']
+ALLOWED_HOSTS = ['onestepframes.onrender.com','127.0.0.1']
 
 
 # Application definition
