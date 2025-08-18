@@ -27,6 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['onestepframes.onrender.com','127.0.0.1']
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://onestepframes.onrender.com",
+    "http://localhost:8000"
+]
+
 
 # Application definition
 
