@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>One-step Frames Condition</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+        nav { background: #f4f4f4; padding: 10px; margin-bottom: 20px; border-radius: 8px; display:flex; flex-wrap:wrap; gap:10px; }
+        nav a { text-decoration:none; color:#0077cc; flex-shrink:0; }
+        nav a:hover { text-decoration:underline; }
+
+        form { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px; }
+        input { padding:10px; border:1px solid #ccc; border-radius:8px; flex:1; min-width:150px; font-size:1em; }
+        button { padding:10px 16px; border:none; border-radius:8px; background-color:#0077cc; color:white; cursor:pointer; flex-shrink:0; }
+        button:hover { background-color:#005fa3; }
+
+        .examples { background:#fafafa; border:1px solid #ddd; padding:10px; border-radius:8px; margin-bottom:20px; }
+        .examples button { margin-left:10px; font-size:0.85em; padding:4px 8px; border:none; border-radius:6px; background-color:#000000; cursor:pointer; }
+        .examples button:hover { background-color:#ddd; }
+
+        .log-box { background:#111; color:#0f0; padding:10px; height:150px; overflow:auto; border-radius:8px; font-family:monospace; white-space:pre-wrap; word-wrap:break-word; margin-bottom:20px; }
+        .output { font-size:1em; margin-bottom:20px; overflow:auto; word-wrap:break-word; }
+
+        /* Mobile tweaks */
+        @media (max-width: 600px) {
+            body { margin:10px; }
+            nav { flex-direction:column; align-items:flex-start; }
+            form { flex-direction:column; }
+            button { width:100%; }
+            
+            input {
+                width: 90%;   /* full width on mobile */
+                min-width: auto; /* remove desktop minimum */
+            }
+            .examples button { margin:5px 0 0 0; width:20%; }
+        }
+    </style>
+</head>
+<body>
+    <h1>One-step Frames Condition</h1>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="/">Home</a>
+        <a href="/docs">Documentation</a>
+        <a href="/about">About</a>
+    </nav>
+
+    <!-- Form -->
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="one_step_condition" placeholder="Enter one-step condition" value="{{ one_step_condition }}">
+        <input type="text" name="S_condition" placeholder="Enter S condition" value="{{ S_condition }}">
+        <button type="submit">Submit</button>
+    </form>
+
+    <div class="examples">
+        <h3>Examples</h3>
+        <ul>
+            <li> First order condition
+                <button onclick="document.querySelector('[name=one_step_condition]').value='formula(forall([w],forall([v],implies(R(w,v),exists([k],and(equal(f(k),v),forall([l],implies(R(k,l),R(w,l)))))))),2).'">Copy</button></li>
+            <li> S
+                <button onclick="document.querySelector('[name=S_condition]').value='formula(forall([w,w1], equiv(S(w,w1), exists([v], and(R(w,v), equal(f(w1),v))))), 3).'">Copy</button></li>
+        </ul>
+    </div>
+
+    <!-- Output -->
+    {% if output %}
+        <h3>SPASS output</h3>
+        <div class="log-box" style="height: 20vw;">{{ output }}</div>
+    {% endif %}
+
+    <!-- Error -->
+    {% if error %}
+        <h3>SPASS error</h3>
+        <div class="log-box">{{ error }}</div>
+    {% endif %}
+
+
+    <script>
+        if (window.MathJax) MathJax.typesetPromise();
+    </script>
+</body>
+</html>

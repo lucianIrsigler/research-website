@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from one_step_frames.step_frame_conditions import findStepFrameCondition, getLogs
+from one_step_frames.spass.spass import SPASS
+import subprocess
+
 
 def to_latex(formula: str) -> str: 
     latex = formula
@@ -51,3 +54,23 @@ def home(request):
         "solution_text": solution_text,
         "user_input": request.POST.get("user_input", "")
     })
+
+
+def spass(request):
+    output = ""
+
+    if request.method == "POST":
+        condition = request.POST.get("one_step_condition", "")
+        S = request.POST.get("S_condition", "")
+
+        if (condition.strip() == "" or S.strip() == ""):
+            print("HERE")
+            return render(request, "spass.html") 
+
+        output,error = SPASS(condition,S)
+        
+        return render(request, "spass.html",{"output":output,"error":error}) 
+
+
+
+    return render(request, "spass.html") 
